@@ -1,37 +1,6 @@
 <template>
   <div>
-    <page-header-wrapper>
-      <template v-slot:content>
-        <div class="page-header-content">
-          <div class="avatar">
-            <a-avatar size="large" :src="currentUser.avatar"/>
-          </div>
-          <div class="content">
-            <div class="content-title">
-              <!-- {{ timeFix }}，{{ user.name }}<span class="welcome-text">，{{ welcome }}</span> -->
-              <span class="welcome-text">{{ welcome }}</span>
-            </div>
-            <!-- <div>前端工程师 | 蚂蚁金服 - 某某某事业群 - VUE平台</div> -->
-          </div>
-        </div>
-      </template>
-      <template v-slot:extraContent>
-        <div class="extra-content">
-          <div class="stat-item">
-            <a-statistic title="回答数" :value="56" />
-          </div>
-          <div class="stat-item">
-            <a-statistic title="浏览数" :value="5600" />
-          </div>
-          <!-- <div class="stat-item">
-            <a-statistic title="团队内排名" :value="8" suffix="/ 24" />
-          </div> -->
-          <!-- <div class="stat-item">
-            <a-statistic title="项目访问" :value="2223" />
-          </div> -->
-        </div>
-      </template>
-    </page-header-wrapper>
+    <question-title :question="question"/>
 
     <a-card style="margin-top: 24px;" :bordered="false">
       <a-list
@@ -47,16 +16,9 @@
             <icon-text type="star-o" :text="item.star" />
             <icon-text type="message" :text="item.message" />
           </template>
-          <a-list-item-meta>
+          <!-- <a-list-item-meta>
             <a slot="title" href="https://vue.ant.design/">{{ item.title }}</a>
-            <!-- <template slot="description">
-              <span>
-                <a-tag>专业课</a-tag>
-                <a-tag>计算机</a-tag>
-                <a-tag>408</a-tag>
-              </span>
-            </template> -->
-          </a-list-item-meta>
+          </a-list-item-meta> -->
           <article-list-content :description="item.description" :owner="item.owner" :avatar="item.avatar" :href="item.href" :updateAt="item.updatedAt" />
         </a-list-item>
         <div slot="footer" v-if="data.length > 0" style="text-align: center; margin-top: 16px;">
@@ -68,11 +30,11 @@
 </template>
 
 <script>
-import { TagSelect, StandardFormRow, ArticleListContent } from '@/components'
-// import { welcome } from '../../utils/util'
+import { TagSelect, StandardFormRow} from '@/components'
 import IconText from './components/IconText'
+import QuestionTitle from './components/QuestionTitle'
+import ArticleListContent from './components/ArticleListContent'
 const TagSelectOption = TagSelect.Option
-
 import { timeFix } from '@/utils/util'
 import { mapState } from 'vuex'
 import { PageHeaderWrapper } from '@ant-design-vue/pro-layout'
@@ -80,6 +42,14 @@ import { Radar } from '@/components'
 
 import { getRoleList, getServiceList } from '@/api/manage'
 
+const ques = {
+  content:'c++课程学到了一半，觉得越想越不明白,为什么c++中要分为heap（堆）和stack（栈）?',
+  anwserNum:14,
+  viewNum:324,
+  reward:50,
+  tagList:'专业课',
+  createTime:'2000-10-2'
+}
 export default {
   components: {
     TagSelect,
@@ -88,15 +58,16 @@ export default {
     ArticleListContent,
     IconText,
     PageHeaderWrapper,
-    Radar
+    Radar,
+    QuestionTitle,
+    brandFold: true
   },
   data () {
     return {
       timeFix: timeFix(),
       avatar: '',
       user: {},
-      welcome:'若a的首地址为2020 FEOOH, a的成员变量x2的机器数为1234 0000H,则其中34H所在存储单元的地址是什么',
-
+      question: {},
       loading: true,
       loadingMore: false,
       data: [],
@@ -120,13 +91,19 @@ export default {
     }
   },
   created () {
+    this.question = ques
     this.user = this.userInfo
     this.avatar = this.userInfo.avatar
   },
   mounted () {
+    console.log('question:')
+    console.log('question:',this.question)
     this.getList()
   },
   methods: {
+    changeFoldState() {
+      this.brandFold = !this.brandFold
+    },
     handleChange (value) {
       console.log(`selected ${value}`)
     },

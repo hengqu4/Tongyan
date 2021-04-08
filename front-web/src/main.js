@@ -10,7 +10,6 @@ import i18n from './locales'
 import { VueAxios } from './utils/request'
 import ProLayout, { PageHeaderWrapper } from '@ant-design-vue/pro-layout'
 import themePluginConfig from '../config/themePluginConfig'
-
 // mock
 // WARNING: `mockjs` NOT SUPPORT `IE` PLEASE DO NOT USE IN `production` ENV.
 import './mock'
@@ -21,8 +20,11 @@ import './permission' // permission control
 import './utils/filter' // global filter
 import './global.less' // global style
 
-Vue.config.productionTip = false
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+Vue.use(ElementUI)
 
+Vue.config.productionTip = false
 // mount axios to `Vue.$http` and `this.$http`
 Vue.use(VueAxios)
 // use pro-layout components
