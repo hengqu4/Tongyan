@@ -16,10 +16,7 @@
             <icon-text type="star-o" :text="item.star" />
             <icon-text type="message" :text="item.message" />
           </template>
-          <!-- <a-list-item-meta>
-            <a slot="title" href="https://vue.ant.design/">{{ item.title }}</a>
-          </a-list-item-meta> -->
-          <article-list-content :description="item.description" :owner="item.owner" :avatar="item.avatar" :href="item.href" :updateAt="item.updatedAt" />
+          <list-content :description="item.description" :owner="item.owner" :avatar="item.avatar" :updateAt="item.updatedAt" />
         </a-list-item>
         <div slot="footer" v-if="data.length > 0" style="text-align: center; margin-top: 16px;">
           <a-button @click="loadMore" :loading="loadingMore">加载更多</a-button>
@@ -30,17 +27,10 @@
 </template>
 
 <script>
-import { TagSelect, StandardFormRow} from '@/components'
 import IconText from './components/IconText'
 import QuestionTitle from './components/QuestionTitle'
-import ArticleListContent from './components/ArticleListContent'
-const TagSelectOption = TagSelect.Option
-import { timeFix } from '@/utils/util'
+import ListContent from './components/ListContent'
 import { mapState } from 'vuex'
-import { PageHeaderWrapper } from '@ant-design-vue/pro-layout'
-import { Radar } from '@/components'
-
-import { getRoleList, getServiceList } from '@/api/manage'
 
 const ques = {
   content:'c++课程学到了一半，觉得越想越不明白,为什么c++中要分为heap（堆）和stack（栈）?',
@@ -52,26 +42,18 @@ const ques = {
 }
 export default {
   components: {
-    TagSelect,
-    TagSelectOption,
-    StandardFormRow,
-    ArticleListContent,
     IconText,
-    PageHeaderWrapper,
-    Radar,
     QuestionTitle,
-    brandFold: true
+    ListContent
   },
   data () {
     return {
-      timeFix: timeFix(),
       avatar: '',
       user: {},
       question: {},
       loading: true,
       loadingMore: false,
-      data: [],
-      form: this.$form.createForm(this)
+      data: []
     }
   },
 
@@ -96,36 +78,25 @@ export default {
     this.avatar = this.userInfo.avatar
   },
   mounted () {
-    console.log('question:')
-    console.log('question:',this.question)
+    // console.log('question:',this.question)
     this.getList()
   },
   methods: {
-    changeFoldState() {
-      this.brandFold = !this.brandFold
-    },
-    handleChange (value) {
-      console.log(`selected ${value}`)
-    },
     getList () {
       this.$http.get('/list/article').then(res => {
-        console.log('res', res)
+        // console.log('res', res)
         this.data = res.result
         this.loading = false
+        console.log('Answer.vue.data', res.result)
       })
     },
     loadMore () {
       this.loadingMore = true
       this.$http.get('/list/article').then(res => {
         this.data = this.data.concat(res.result)
+        console.log('Answer.vue.loadMore', res.result)
       }).finally(() => {
         this.loadingMore = false
-      })
-    },
-    setOwner () {
-      const { form: { setFieldsValue } } = this
-      setFieldsValue({
-        owner: ['wzj']
       })
     }
   }

@@ -1,16 +1,16 @@
 <template>
-  <div class="antd-pro-components-article-list-content-index-listContent">
-    <div class="description">
-      <!-- <slot> -->
-      <ellipsis :length="160" tooltip>
-        {{ description }}
-      </ellipsis>
-      <!-- </slot> -->
+  <div class="content">
+    <div :class="{'desc-ellipsis': !isExpend}" class="description">
+        {{ description }}    
     </div>
+    <el-button type="text" :icon="isExpend?'el-icon-arrow-up':'el-icon-arrow-down'" @click="expendClick" style='float:right'>
+      {{isExpend? '收起': '展开' }}
+    </el-button>
     <div class="extra">
-      <a-avatar :src="avatar" size="small" />
-      <a :href="href">{{ owner }}</a> 
-      <!-- <a :href="href">{{ owner }}</a> 发布在 <a :href="href">{{ href }}</a> -->
+      <a>
+      <!-- <a :href="href"> -->
+        <a-avatar :src="avatar" size="small" />{{ owner }}
+      </a> 
       <em>{{ updateAt | moment }}</em>
     </div>
   </div>
@@ -19,14 +19,11 @@
 <script>
 import { Ellipsis } from '@/components'
 export default {
-  name: 'ArticleListContent',
-  components: {
-    Ellipsis
-  },
+  name: 'ListContent',
   props: {
     prefixCls: {
       type: String,
-      default: 'antd-pro-components-article-list-content-index-listContent'
+      default: 'content'
     },
     description: {
       type: String,
@@ -40,22 +37,45 @@ export default {
       type: String,
       required: true
     },
-    href: {
-      type: String,
-      required: true
-    },
     updateAt: {
       type: String,
       required: true
     }
+  },
+  data(){
+    return{
+      isExpend: false
+    }
+  },
+  methods:{
+    expendClick(){
+      this.isExpend = !this.isExpend
+    }
   }
 }
+
 </script>
 
 <style lang="less" scoped>
-@import './index.less';
+@import "~ant-design-vue/lib/style/index";
 
-.antd-pro-components-article-list-content-index-listContent {
+// The prefix to use on all css classes from ant-pro.
+@ant-pro-prefix             : ant-pro;
+@ant-global-sider-zindex    : 106;
+@ant-global-header-zindex   : 105;
+
+.content {
+  .desc-ellipsis{
+    line-height: 22px;
+    white-space:pre-line;
+  //   width: 10.3rem;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    
+  }
   .description {
     // max-width: 720px;
     line-height: 22px;
@@ -83,7 +103,7 @@ export default {
 }
 
 @media screen and (max-width: @screen-xs) {
-  .antd-pro-components-article-list-content-index-listContent {
+  .content {
     .extra {
       & > em {
         display: block;
