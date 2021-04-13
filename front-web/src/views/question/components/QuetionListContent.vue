@@ -1,5 +1,5 @@
 <template>
-  <page-header-wrapper title=" ">
+  <div>
     <template v-slot:content>
       <div class="extra-content">
         <div class="stat-item">
@@ -9,7 +9,6 @@
           <a-statistic title="浏览数" :value="data.viewNum" />
         </div>
       </div>
-      <!-- <div style="padding-left:40px"> -->
       <div>
       <div class="label-tag" >
         <span>
@@ -26,17 +25,15 @@
       <el-button type="text" icon="el-icon-edit">写回答</el-button>
       </div>
     </template>
-  </page-header-wrapper>
+  </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import { PageHeaderWrapper } from '@ant-design-vue/pro-layout'
 
 export default {
-  // name:'QuestionTitle',
   components: {
-    PageHeaderWrapper,
+    
   },
   props: ['question'],
   data () {
@@ -45,25 +42,22 @@ export default {
     }
   },
   created () {
-    // console.log('data:')
-    // console.log('data:',this.data)
-    // console.log('test:')
-    // console.log('test:',this.question)
+    
   },
   methods: {
-    // changeFoldState() {
-    //   this.brandFold = !this.brandFold
-    // },
-    // handleChange (value) {
-    //   console.log(`selected ${value}`)
-    // },
-    // getList () {
-    //   this.$http.get('/list/article').then(res => {
-    //     console.log('res', res)
-    //     this.data = res.result
-    //     this.loading = false
-    //   })
-    // }
+    changeFoldState() {
+      this.brandFold = !this.brandFold
+    },
+    handleChange (value) {
+      console.log(`selected ${value}`)
+    },
+    getList () {
+      this.$http.get('/list/article').then(res => {
+        console.log('res', res)
+        this.data = res.result
+        this.loading = false
+      })
+    }
   }
 }
 </script>

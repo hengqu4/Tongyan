@@ -33,6 +33,40 @@
         :dataSource="data"
       >
         <a-list-item :key="item.id" slot="renderItem" slot-scope="item">
+          <!-- <template slot="actions">
+            <span>{{item.owner}}</span>
+            <span>{{item.updatedAt}}</span>
+            <span class='el-icon-coin' style="color:#d35400">{{ item.star }}</span>
+          </template> -->
+          <template slot="extra">
+            <div class="extra-content">
+              <div class="stat-item">
+                <a-statistic title="回答数" :value="item.star" style="font-size: 10px  !important;;"/>
+              </div>
+              <div class="stat-item">
+                <a-statistic title="浏览数" :value="item.star" />
+              </div>
+            </div>
+          </template>
+
+          <a-list-item-meta>
+            <template slot="description">
+              <span>
+                <a-tag>Ant Design</a-tag>
+                <a-tag>设计语言</a-tag>
+                <a-tag>蚂蚁金服</a-tag>
+              </span>
+            </template>
+          </a-list-item-meta>
+          <ellipsis-text :longText="item.description" />
+          <div class="extra">
+            <a :href="href">{{ item.owner }}</a>
+            <em>{{ item.updateAt | moment }}</em>
+            <span class='el-icon-coin' style="color:#d35400;padding-left:10px">{{ item.star }}</span>
+          </div>
+        </a-list-item>
+
+        <!-- <a-list-item :key="item.id" slot="renderItem" slot-scope="item">
           <template slot="actions">
             <icon-text type="star-o" :text="item.star" />
             <icon-text type="like-o" :text="item.like" />
@@ -54,8 +88,7 @@
             :updateAt="item.updatedAt"
             :description="item.description" 
           />
-          <!-- <article-list-content :description="item.description" :owner="item.owner" :avatar="item.avatar" :href="item.href" :updateAt="item.updatedAt" /> -->
-        </a-list-item>
+        </a-list-item> -->
         <div slot="footer" v-if="data.length > 0" style="text-align: center; margin-top: 16px;">
           <a-button @click="loadMore" :loading="loadingMore">加载更多</a-button>
         </div>
@@ -65,7 +98,8 @@
 </template>
 
 <script>
-import { TagSelect, StandardFormRow, ListContent } from '@/components'
+// import EllipsisText from '@/components/EllipsisText'
+import { TagSelect, StandardFormRow, EllipsisText } from '@/components'
 import IconText from './components/IconText'
 const TagSelectOption = TagSelect.Option
 
@@ -75,7 +109,7 @@ export default {
     TagSelectOption,
     StandardFormRow,
     IconText,
-    ListContent
+    EllipsisText
   },
   data () {
     return {
@@ -118,6 +152,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import '~ant-design-vue/es/style/themes/default.less';
+
 .ant-pro-page-header-search {
   text-align: center;
   margin-bottom: 16px;
@@ -127,6 +163,48 @@ export default {
     margin-right: 24px;
     padding: 0 8px;
     font-size: 14px;
+  }
+}
+
+.extra {
+    margin-top: 16px;
+    color: @text-color-secondary;
+    line-height: 22px;
+
+    & /deep/ .ant-avatar {
+      position: relative;
+      top: 1px;
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+      vertical-align: top;
+    }
+
+    & > em {
+      margin-left: 16px;
+      color: @disabled-color;
+      font-style: normal;
+    }
+  }
+
+.extra-content {
+  font-size: 16px;
+  padding-top: 20px;
+
+  .stat-item {
+    position: relative;
+    display: inline-block;
+    padding: 0 32px;
+    
+    &::after {
+      position: absolute;
+      top: 8px;
+      right: 0;
+      width: 1px;
+      height: 40px;
+      background-color: @border-color-split;
+      content: '';
+    }
   }
 }
 </style>

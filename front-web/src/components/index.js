@@ -30,9 +30,11 @@ import Dialog from '@/components/Dialog'
 //my components
 import EllipsisText from '@/components/EllipsisText'
 import ListContent from '@/components/ListContent'
+import IconText from '@/components/IconText'
 
 
 export {
+  IconText,
   EllipsisText,
   ListContent,
   AvatarList,
