@@ -27,7 +27,14 @@ import ArticleListContent from '@/components/ArticleListContent'
 
 import Dialog from '@/components/Dialog'
 
+//my components
+import EllipsisText from '@/components/EllipsisText'
+import ListContent from '@/components/ListContent'
+
+
 export {
+  EllipsisText,
+  ListContent,
   AvatarList,
   Bar,
   ChartCard,

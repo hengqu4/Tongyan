@@ -1,13 +1,6 @@
 <template>
   <page-header-wrapper title=" ">
     <template v-slot:content>
-      <div class="label-tag">
-        <span>
-          <a-tag>{{data.tagList}}</a-tag>
-          <a-tag>计算机</a-tag>
-          <a-tag>408</a-tag>
-        </span>
-      </div>
       <div class="extra-content">
         <div class="stat-item">
           <a-statistic title="回答数" :value="data.anwserNum" />
@@ -16,12 +9,22 @@
           <a-statistic title="浏览数" :value="data.viewNum" />
         </div>
       </div>
+      <!-- <div style="padding-left:40px"> -->
+      <div>
+      <div class="label-tag" >
+        <span>
+          <a-tag>{{data.tagList}}</a-tag>
+          <a-tag>计算机</a-tag>
+          <a-tag>408</a-tag>
+        </span>
+      </div>
       <div class="content">
         {{ data.content }}
       </div>
       {{ data.createTime }}
       <span class='el-icon-coin' style="color:#d35400;margin: 0 30px">{{ data.reward }}</span>
       <el-button type="text" icon="el-icon-edit">写回答</el-button>
+      </div>
     </template>
   </page-header-wrapper>
 </template>

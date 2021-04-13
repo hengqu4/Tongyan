@@ -1,8 +1,7 @@
 <template>
   <div>
     <question-title :question="question"/>
-
-    <a-card style="margin-top: 24px;" :bordered="false">
+    <a-card style="margin: 40px;" :bordered="false">
       <a-list
         size="large"
         rowKey="id"
@@ -16,7 +15,21 @@
             <icon-text type="star-o" :text="item.star" />
             <icon-text type="message" :text="item.message" />
           </template>
-          <list-content :description="item.description" :owner="item.owner" :avatar="item.avatar" :updateAt="item.updatedAt" />
+          <list-content 
+            :owner="item.owner" 
+            :avatar="item.avatar" 
+            :updateAt="item.updatedAt"
+            :description="item.description" 
+          />
+          <!-- <div class="content">
+            <div class="extra">
+              <a>
+                <a-avatar :src="item.avatar" size="small" />{{ item.owner }}
+              </a> 
+              <em>{{ item.updateAt | moment }}</em>
+            </div>
+            <ellipsis-text :longText="item.description" />
+          </div> -->
         </a-list-item>
         <div slot="footer" v-if="data.length > 0" style="text-align: center; margin-top: 16px;">
           <a-button @click="loadMore" :loading="loadingMore">加载更多</a-button>
@@ -27,9 +40,9 @@
 </template>
 
 <script>
+import {ListContent} from '@/components'
 import IconText from './components/IconText'
 import QuestionTitle from './components/QuestionTitle'
-import ListContent from './components/ListContent'
 import { mapState } from 'vuex'
 
 const ques = {
@@ -104,17 +117,46 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  @import "./Answer.less";
+@import "~ant-design-vue/lib/style/index";
 
-.ant-pro-page-header-search {
-  text-align: center;
-  margin-bottom: 16px;
+// The prefix to use on all css classes from ant-pro.
+@ant-pro-prefix             : ant-pro;
+@ant-global-sider-zindex    : 106;
+@ant-global-header-zindex   : 105;
+
+.content {
+  .extra {
+    // margin-top: 16px;
+    margin-bottom: 16px;
+    color: @text-color-secondary;
+    line-height: 22px;
+
+    & /deep/ .ant-avatar {
+      position: relative;
+      top: 1px;
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+      vertical-align: top;
+    }
+
+    & > em {
+      margin-left: 16px;
+      color: @disabled-color;
+      font-style: normal;
+    }
+  }
 }
-.ant-pro-components-tag-select {
-  /deep/ .ant-pro-tag-select .ant-tag {
-    margin-right: 24px;
-    padding: 0 8px;
-    font-size: 14px;
+
+@media screen and (max-width: @screen-xs) {
+  .content {
+    .extra {
+      & > em {
+        display: block;
+        margin-top: 8px;
+        margin-left: 0;
+      }
+    }
   }
 }
 </style>
