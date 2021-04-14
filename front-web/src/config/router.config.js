@@ -45,40 +45,47 @@ export const asyncRouterMap = [
         redirect: '/info/list',
         meta: { title: '灌水区', icon: 'table' },
       },
-      
+      // {
+      //   path: '/study',
+      //   name: 'studyPage',
+      //   component: () => import('@/views/study/Study'),
+      //   meta: { title: '自习', icon: 'profile' },
+      // },
       {
         path: '/study',
         name: 'study',
         component: RouteView,
-        redirect: '/study/my',
+        redirect: '/study',
         meta: { title: '学习区', icon: 'profile' },
         children: [
           {
-            path: '/study/my',
+            path: '/study',
             name: '我的学习',
             component: () => import('@/views/study/Study'),
-            meta: { title: '我的学习', keepAlive: true}
-          },
-          // {
-          //   path: '/study/you',
-          //   name: '你的学习',
-          //   component: () => import('@/views/study/StudyCol'),
-          //   meta: { title: '横板学习', keepAlive: true}
-          // },
-          {
-            path: '/study/studyRoom',
-            name: '自习室',
-            component: () => import('@/views/study/StudyRoom'),
-            meta: { title: '自习室', keepAlive: true}
+            meta: { title: '我的学习', keepAlive: true,}
           }
         ]
       },
       {
-        path: '/resource',
-        name: 'resource',
+        path: '/bargain',
+        name: 'bargain',
         component: RouteView,
-        redirect: '/resource/list',
-        meta: { title: '资料区', icon: 'form' },
+        redirect: '/bargain',
+        meta: { title: '交易', icon: 'form' },
+        children: [
+          {
+            path: '/bargain',
+            name: '资料展示',
+            component: () => import('@/views/bargain/Bargain'),
+            meta: { title: '资料展示', keepAlive: true}
+          },
+          {
+            path: '/bargain_item/:bargainId',
+            name: 'bargain_item',
+            component: () => import('@/views/bargain/BargainItem'),
+            meta: { title: '买卖', keepAlive: true}
+          }
+        ]
       },
       // dashboard
       {
