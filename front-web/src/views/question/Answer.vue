@@ -36,11 +36,12 @@
         </div>
       </a-list>
     </a-card>
+    <back-top/>
   </div>
 </template>
 
 <script>
-import {ListContent} from '@/components'
+import {ListContent,BackTop} from '@/components'
 import IconText from './components/IconText'
 import QuestionTitle from './components/QuestionTitle'
 import { mapState } from 'vuex'
@@ -55,6 +56,7 @@ const ques = {
 }
 export default {
   components: {
+    BackTop,
     IconText,
     QuestionTitle,
     ListContent

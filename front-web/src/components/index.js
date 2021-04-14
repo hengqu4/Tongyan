@@ -31,9 +31,11 @@ import Dialog from '@/components/Dialog'
 import EllipsisText from '@/components/EllipsisText'
 import ListContent from '@/components/ListContent'
 import IconText from '@/components/IconText'
+import BackTop from '@/components/BackTop'
 
 
 export {
+  BackTop,
   IconText,
   EllipsisText,
   ListContent,

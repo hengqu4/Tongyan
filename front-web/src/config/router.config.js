@@ -21,8 +21,7 @@ export const asyncRouterMap = [
         name: 'question',
         component: RouteView,
         redirect: '/question/list',
-        // meta: { title: '学习区', icon: 'check-circle-o', permission: ['question'] },
-        meta: { title: '学习区', icon: 'check-circle-o' },
+        meta: { title: '答疑区', icon: 'check-circle-o' },
         children: [
           {
             path: '/question/list',
@@ -36,12 +35,6 @@ export const asyncRouterMap = [
             component: () => import('@/views/question/Answer'),
             meta: { title: '专业答疑', keepAlive: true}
           }
-          // {
-          //   path: '/question/test',
-          //   name: '测试测试',
-          //   component: () => import('@/views/question/components/AnswerList'),
-          //   meta: { title: '测试测试测试测试', keepAlive: true}
-          // }
         ]
       },
       
@@ -54,11 +47,31 @@ export const asyncRouterMap = [
       },
       
       {
-        path: '/room',
-        name: 'room',
+        path: '/study',
+        name: 'study',
         component: RouteView,
-        redirect: '/room/list',
-        meta: { title: '自习区', icon: 'profile' },
+        redirect: '/study/my',
+        meta: { title: '学习区', icon: 'profile' },
+        children: [
+          {
+            path: '/study/my',
+            name: '我的学习',
+            component: () => import('@/views/study/Study'),
+            meta: { title: '我的学习', keepAlive: true}
+          },
+          // {
+          //   path: '/study/you',
+          //   name: '你的学习',
+          //   component: () => import('@/views/study/StudyCol'),
+          //   meta: { title: '横板学习', keepAlive: true}
+          // },
+          {
+            path: '/study/studyRoom',
+            name: '自习室',
+            component: () => import('@/views/study/StudyRoom'),
+            meta: { title: '自习室', keepAlive: true}
+          }
+        ]
       },
       {
         path: '/resource',

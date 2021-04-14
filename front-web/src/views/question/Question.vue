@@ -62,7 +62,7 @@
           <div class="extra">
             <a :href="href">{{ item.owner }}</a>
             <em>{{ item.updateAt | moment }}</em>
-            <span class='el-icon-coin' style="color:#d35400;padding-left:10px">{{ item.star }}</span>
+            <span class='el-icon-coin' style="color:#d35400;padding-left: 10px">{{ item.star }}</span>
           </div>
         </a-list-item>
 
@@ -165,7 +165,6 @@ export default {
     font-size: 14px;
   }
 }
-
 .extra {
     margin-top: 16px;
     color: @text-color-secondary;
@@ -196,6 +195,24 @@ export default {
     display: inline-block;
     padding: 0 32px;
     
+    > p:first-child {
+      color: @text-color-secondary;
+      font-size: @font-size-base;
+      line-height: 22px;
+    }
+
+    > p {
+      margin: 0;
+      color: @heading-color;
+      font-size: 30px;
+      line-height: 38px;
+
+      > span {
+        color: @text-color-secondary;
+        font-size: 20px;
+      }
+    }
+
     &::after {
       position: absolute;
       top: 8px;
@@ -204,6 +221,14 @@ export default {
       height: 40px;
       background-color: @border-color-split;
       content: '';
+    }
+
+    &:last-child {
+      padding-right: 0;
+
+      &::after {
+        display: none;
+      }
     }
   }
 }
