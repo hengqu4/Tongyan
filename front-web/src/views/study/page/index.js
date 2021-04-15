@@ -1,5 +1,5 @@
-import AppPage from './App'
-import ArticlePage from './Article'
-import ProjectPage from './Project'
+import RoomPage from './Room'
+import MissionPage from './Mission'
+import StatisticPage from './Statistic'
 
-export { AppPage, ArticlePage, ProjectPage }
+export { RoomPage, MissionPage, StatisticPage }

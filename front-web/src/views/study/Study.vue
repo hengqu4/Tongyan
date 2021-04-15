@@ -40,9 +40,9 @@
           :activeTabKey="noTitleKey"
           @tabChange="key => handleTabChange(key, 'noTitleKey')"
         >
-          <article-page v-if="noTitleKey === 'article'"></article-page>
-          <app-page v-else-if="noTitleKey === 'app'"></app-page>
-          <project-page v-else-if="noTitleKey === 'project'"></project-page>
+          <mission-page v-if="noTitleKey === 'mission'"></mission-page>
+          <room-page v-else-if="noTitleKey === 'room'"></room-page>
+          <statistic-page v-else-if="noTitleKey === 'statistic'"></statistic-page>
         </a-card>
       </a-col>
     </a-row>
@@ -53,7 +53,7 @@
 <script>
 import {BackTop} from '@/components'
 import { PageView, RouteView } from '@/layouts'
-import { AppPage, ArticlePage, ProjectPage } from './page'
+import { RoomPage, MissionPage, StatisticPage } from './page'
 
 import { mapGetters } from 'vuex'
 
@@ -62,9 +62,9 @@ export default {
     BackTop,
     RouteView,
     PageView,
-    AppPage,
-    ArticlePage,
-    ProjectPage
+    RoomPage,
+    MissionPage,
+    StatisticPage
   },
   data () {
     return {
@@ -80,19 +80,19 @@ export default {
 
       tabListNoTitle: [
         {
-          key: 'article',
+          key: 'mission',
           tab: '代办'
         },
         {
-          key: 'project',
+          key: 'statistic',
           tab: '统计'
         },
         {
-          key: 'app',
+          key: 'room',
           tab: '自习室'
         }
       ],
-      noTitleKey: 'app'
+      noTitleKey: 'statistic'
     }
   },
   computed: {
